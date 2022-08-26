@@ -163,12 +163,12 @@ class ModelEvaluator:
         
         # Test data에서 상호작용한 각각의 상품에 대해
         for item_id in person_interacted_items_testset:
-            # 상호작용하지 않은 100개의 랜덤샘플 상품 추출, 이때 이 상품들은 사용자와 이전에 관련이 없었다고 가정
+            # 상호작용하지 않은 400개의 랜덤샘플 상품 추출, 이때 이 상품들은 사용자와 이전에 관련이 없었다고 가정
             non_interacted_items_sample = self.get_not_interacted_items_sample(person_id, 
                                                                           sample_size=EVAL_RANDOM_SAMPLE_NON_INTERACTED_ITEMS, 
                                                                           seed=item_id%(2**32))
 
-            # 상호작용하지 않은 100개의 상품과 현재 상호작용하는 상품 1개 결합
+            # 상호작용하지 않은 400개의 상품과 현재 상호작용하는 상품 1개 결합
             items_to_filter_recs = non_interacted_items_sample.union(set([item_id]))
 
             # 바로 위에서 결합한 상품 리스트를 기준으로 사용자 추천목록에 있는 상품들만 가져옴
@@ -207,7 +207,7 @@ class ModelEvaluator:
             people_metrics.append(person_metrics)
         print('%d users processed' % idx)
 
-        detailed_results_df = pd.DataFrame(people_metrics)                             .sort_values('interacted_count', ascending=False)
+        detailed_results_df = pd.DataFrame(people_metrics).sort_values('interacted_count', ascending=False)
         
         global_recall_at_5 = detailed_results_df['hits@5_count'].sum() / float(detailed_results_df['interacted_count'].sum())
         global_recall_at_10 = detailed_results_df['hits@10_count'].sum() / float(detailed_results_df['interacted_count'].sum())
