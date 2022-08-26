@@ -1,0 +1,1 @@
+plt.rc('font', family='NanumGothic') # For Windows

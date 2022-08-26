@@ -1,0 +1,9 @@
+cd로 작업할 경로로 이동한다.
+1. pip list로 설치된 패키지를 확인한다.
+2. pip freeze > packages.txt 로 패키지명을 저장한다.
+3. 명령어  pip download -d ./pip_packages/ -r packages.txt   를 입력하여 패키지를 다운한다. -파이썬 버전에따라 -r없을수도 있음.
+4. 설치할 폐쇄망 경로에 가서 pip install --no-index --find-links=./pip_packages/ -r packages.txt를 입력한다.
+
+
+super-mario 이거 빠져야함. 버전종속성 3.6인데 왜 딸려옴.
+nes-py는 얘 하위 라이브러리니까 당연히 빠짐. .
